@@ -21,16 +21,17 @@ class MainView : Form
         this.model = model;
         this.model.Change += this.UpdateView;
 
-        this.Text = "Lab 1 : Task 1";
-        this.ClientSize = new Size(320, 320);
+        this.Text = "Lab 1 : Task 2";
+        this.ClientSize = new Size(240, 200);
+        this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
         this.numberInput1 = new TextBox { 
-            TextAlign = HorizontalAlignment.Right,
+            TextAlign = HorizontalAlignment.Center,
             Dock = DockStyle.Fill,
             MaxLength = 10
         };
         this.numberInput2 = new TextBox { 
-            TextAlign = HorizontalAlignment.Right,
+            TextAlign = HorizontalAlignment.Center,
             Dock = DockStyle.Fill,
             MaxLength = 10
         };

@@ -52,10 +52,19 @@ class NumberModel
             int num2 = this._number2.Value;
             int divisor = 4;
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("{0} is {1}\n", 
+            sb.AppendFormat("Number #1 ({0}) is {1}.\n", 
                 num1, (num1 % 2 == 0) ? "even" : "odd");
-            sb.AppendFormat("{0} is {1} by {2}\n", 
+            sb.AppendFormat("Number #1 ({0}) is {1} by {2}.\n", 
                 num1, (num1 % divisor == 0) ? "divisible" : "not divisible", divisor);
+            if (num1 == num2) {
+                sb.Append("Numbers are equal.\n");
+            }
+            else if (num1 % num2 == 0) {
+                sb.AppendFormat("{0} is divisible by {1}.\n", num1, num2);
+            }
+            else if (num2 % num1 == 0) {
+                sb.AppendFormat("{0} is divisible by {1}.\n", num2, num1);
+            }
             return sb.ToString();
         }
     }
