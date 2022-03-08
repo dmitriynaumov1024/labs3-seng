@@ -1,11 +1,13 @@
 using System;
 using System.IO;
+using System.Text;
 
 class TextEditor: ITextEditor
 {
     public virtual string Text { get; set; }
     public Func<Stream> SaveSelector { get; set; }
     public Func<Stream> OpenSelector { get; set; }
+    public Action<TextStats> ShowStatsPopup { get; set; }
     public event Action TextChanged;
 
     public bool TryOpen() 
@@ -32,5 +34,10 @@ class TextEditor: ITextEditor
         catch (Exception ex) {
             return false;
         }
+    }
+
+    public void ShowStats()
+    {
+        this.ShowStatsPopup(new TextStats(this.Text, Encoding.UTF8));
     }
 }

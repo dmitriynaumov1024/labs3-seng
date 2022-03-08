@@ -11,7 +11,8 @@ class Program
         Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
         var editor = new TextEditor {
             OpenSelector = Actions.SelectFileToOpen,
-            SaveSelector = Actions.SelectFileToSave
+            SaveSelector = Actions.SelectFileToSave,
+            ShowStatsPopup = Actions.ShowStatsPopup
         };
         var view = new MainView(editor);
         Application.Run(view);

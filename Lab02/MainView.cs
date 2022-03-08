@@ -47,6 +47,9 @@ class MainView : Form
         fileItem.DropDownItems.Add("Save as...", null, (sender, args) => {
             editor.TrySave();
         });
+        fileItem.DropDownItems.Add("Statistics", null, (sender, args) => {
+            editor.ShowStats();
+        });
         this.menuStrip.Items.Add(fileItem);
 
         // Add top-level controls to this view  
