@@ -6,23 +6,34 @@ using System.Linq;
 
 class MainView : Form
 {
+    private ITextEditor editor;
+
     private TextBox textArea;
     private MenuStrip menuStrip;
 
-    public MainView() : base()
+    public MainView(ITextEditor editor) : base()
     {
+        this.editor = editor;
+
         this.Text = "Bloknot";
-        this.ClientSize = new Size(600, 480);
+        this.ClientSize = new Size(600, 420);
         this.FormBorderStyle = FormBorderStyle.Sizable;
 
         // Set up text area
         this.textArea = new TextBox {
             Multiline = true,
+            AcceptsTab = true,
             AcceptsReturn = true,
             Dock = DockStyle.Fill,
             Font = Styles.MonospaceFont,
             BackColor = Styles.BackgroundColor,
             ScrollBars = ScrollBars.Vertical
+        };
+        this.textArea.TextChanged += (sender, args) => {
+            this.editor.Text = this.textArea.Text;
+        };
+        this.editor.TextChanged += () => {
+            this.textArea.Text = this.editor.Text;
         };
 
         // Set up menu strip
@@ -31,10 +42,10 @@ class MainView : Form
         };
         var fileItem = new ToolStripMenuItem { Text = "File" };
         fileItem.DropDownItems.Add("Open file...", null, (sender, args) => {
-            MessageBox.Show("Sorry, you can not open files yet...");
+            editor.TryOpen();
         });
         fileItem.DropDownItems.Add("Save as...", null, (sender, args) => {
-            MessageBox.Show("Sorry, you can not save files yet...");
+            editor.TrySave();
         });
         this.menuStrip.Items.Add(fileItem);
 

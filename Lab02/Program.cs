@@ -9,7 +9,11 @@ class Program
     static void Main()
     {
         Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-        var view = new MainView();
+        var editor = new TextEditor {
+            OpenSelector = Actions.SelectFileToOpen,
+            SaveSelector = Actions.SelectFileToSave
+        };
+        var view = new MainView(editor);
         Application.Run(view);
     }    
 }
