@@ -12,7 +12,7 @@ class PasswordGeneratorModel
     static string 
         AlphabetChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
         Digits = "0123456789",
-        Punctuation = "-+.=,/:;'\"*&?!$(){}[]";
+        Punctuation = "_-+.=,/:;*&?!$";
     
 
     // Password contains only random latin characters by default.
