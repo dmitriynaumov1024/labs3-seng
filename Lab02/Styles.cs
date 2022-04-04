@@ -7,5 +7,5 @@ static class Styles
         new Font("Consolas", 11);
 
     public static Color BackgroundColor = 
-        Color.FromArgb(0xfb, 0xfb, 0xfb);
+        Color.FromArgb(253, 253, 253);
 }

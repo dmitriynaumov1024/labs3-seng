@@ -12,7 +12,8 @@ class Program
         var editor = new TextEditor {
             OpenSelector = Actions.SelectFileToOpen,
             SaveSelector = Actions.SelectFileToSave,
-            ShowStatsPopup = Actions.ShowStatsPopup
+            ShowStatsPopup = Actions.ShowStatsPopup,
+            ShowRemovedSpacesPopup = Actions.ShowProposedTextPopup
         };
         var view = new MainView(editor);
         Application.Run(view);

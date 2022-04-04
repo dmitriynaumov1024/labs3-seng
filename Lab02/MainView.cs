@@ -16,7 +16,7 @@ class MainView : Form
         this.editor = editor;
 
         this.Text = "Bloknot";
-        this.ClientSize = new Size(600, 420);
+        this.ClientSize = new Size(800, 600);
         this.FormBorderStyle = FormBorderStyle.Sizable;
 
         // Set up text area
@@ -50,7 +50,14 @@ class MainView : Form
         fileItem.DropDownItems.Add("Statistics", null, (sender, args) => {
             editor.ShowStats();
         });
+        var editItem = new ToolStripMenuItem { Text = "Edit" };
+        editItem.DropDownItems.Add("Undo", null, (sender, args) => {});
+        editItem.DropDownItems.Add("Redo", null, (sender, args) => {});
+        editItem.DropDownItems.Add("Remove spaces", null, (sender, args) => {
+            editor.ShowRemovedSpaces();
+        });
         this.menuStrip.Items.Add(fileItem);
+        this.menuStrip.Items.Add(editItem);
 
         // Add top-level controls to this view  
         this.Controls.Add(this.textArea);

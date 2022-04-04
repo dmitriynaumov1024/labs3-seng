@@ -8,6 +8,7 @@ class TextEditor: ITextEditor
     public Func<Stream> SaveSelector { get; set; }
     public Func<Stream> OpenSelector { get; set; }
     public Action<TextStats> ShowStatsPopup { get; set; }
+    public Func<string, string, bool> ShowRemovedSpacesPopup { get; set; }
     public event Action TextChanged;
 
     public bool TryOpen() 
@@ -39,5 +40,14 @@ class TextEditor: ITextEditor
     public void ShowStats()
     {
         this.ShowStatsPopup(new TextStats(this.Text, Encoding.UTF8));
+    }
+
+    public void ShowRemovedSpaces()
+    {
+        string newText = Utils.RemoveSpaces(this.Text);
+        if (this.ShowRemovedSpacesPopup(this.Text, newText)) {
+            this.Text = newText;
+            this.TextChanged.Invoke();
+        }
     }
 }

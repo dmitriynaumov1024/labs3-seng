@@ -6,5 +6,6 @@ interface ITextEditor
     bool TrySave();
     bool TryOpen();
     void ShowStats();
+    void ShowRemovedSpaces();
     event Action TextChanged;
 }

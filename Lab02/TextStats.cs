@@ -4,7 +4,7 @@ using System.Text;
 
 class TextStats
 {
-    public int KbCount { get; private set; }
+    public double KbCount { get; private set; }
     public int CharCount { get; private set; }
     public int LineCount { get; private set; }
     public int PageCount { get; private set; }
@@ -13,7 +13,7 @@ class TextStats
     public TextStats (string text, Encoding encoding)
     {
         if (text==null) text = string.Empty;
-        this.KbCount = encoding.GetByteCount(text) / 1024 + 1;
+        this.KbCount = (double)(encoding.GetByteCount(text)) / 1024;
         this.CharCount = text.Length;
         this.LineCount = text.Count(c => c == '\n');
         if (!text.EndsWith("\n")) this.LineCount += 1;
