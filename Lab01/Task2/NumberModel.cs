@@ -59,10 +59,10 @@ class NumberModel
             if (num1 == num2) {
                 sb.Append("Numbers are equal.\n");
             }
-            else if (num1 % num2 == 0) {
+            else if (num2 != 0 && num1 % num2 == 0) {
                 sb.AppendFormat("{0} is divisible by {1}.\n", num1, num2);
             }
-            else if (num2 % num1 == 0) {
+            else if (num1 != 0 && num2 % num1 == 0) {
                 sb.AppendFormat("{0} is divisible by {1}.\n", num2, num1);
             }
             return sb.ToString();
