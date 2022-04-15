@@ -13,6 +13,7 @@ class Program
             OpenSelector = Actions.SelectFileToOpen,
             SaveSelector = Actions.SelectFileToSave,
             ShowStatsPopup = Actions.ShowStatsPopup,
+            ShowSearchPopup = Actions.ShowSearch,
             ShowRemovedSpacesPopup = Actions.ShowProposedTextPopup
         };
         var view = new MainView(editor);

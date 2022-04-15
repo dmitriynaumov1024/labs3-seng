@@ -10,6 +10,13 @@ class TextStats
     public int PageCount { get; private set; }
     public int EmptyLineCount { get; private set; }
 
+    public int DigitCount { get; private set; }
+    public int LetterCount { get; private set; }
+    public int PunctCount { get; private set; }
+    public int VowelCount { get; private set; }
+    public int ConsCount { get; private set; }
+    public int OtherCount { get; private set; }
+
     public TextStats (string text, Encoding encoding)
     {
         if (text==null) text = string.Empty;
@@ -19,10 +26,39 @@ class TextStats
         if (!text.EndsWith("\n")) this.LineCount += 1;
         this.PageCount = this.CharCount / PageCharCount + 1;
         this.EmptyLineCount = CountEmptyLines(text);
+        
+        this.DigitCount = 0;
+        this.LetterCount = 0;
+        this.PunctCount = 0;
+        this.VowelCount = 0;
+        this.ConsCount = 0;
+        this.OtherCount = 0;
+        foreach (char c in text) {
+            if (Char.IsDigit(c)) {
+                this.DigitCount++;
+            }
+            else if (Char.IsLetter(c)) {
+                this.LetterCount++;
+                if (Vowels.Contains(c)) {
+                    this.VowelCount++;
+                }
+                else {
+                    this.ConsCount++;
+                }
+            }
+            else if (Char.IsPunctuation(c)) {
+                this.PunctCount++;
+            }
+            else {
+                this.OtherCount++;
+            }
+        }
     }
 
     // there are approx. 1800 chars in one page
     static int PageCharCount = 1800;
+
+    static char[] Vowels = "aeiouyаоуеиіяюєїёыэ".ToCharArray();
 
     // helper method to count empty lines
     static int CountEmptyLines (string text)

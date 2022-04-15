@@ -1,22 +1,80 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 class TextEditor: ITextEditor
 {
-    public virtual string Text { get; set; }
+    const int HistorySize = 100;
+
     public Func<Stream> SaveSelector { get; set; }
     public Func<Stream> OpenSelector { get; set; }
     public Action<TextStats> ShowStatsPopup { get; set; }
+    public Action<string> ShowSearchPopup { get; set; }
     public Func<string, string, bool> ShowRemovedSpacesPopup { get; set; }
     public event Action TextChanged;
+
+    private LinkedList<string> History = new LinkedList<string> { };
+    private LinkedList<string> UndoneHistory = new LinkedList<string> { };
+
+    public virtual string Text { 
+        get {
+            // Return the last item of the history
+            // Prevent null pointer exceptions
+            return this.History.Count > 0 ? 
+                this.History.Last.Value : 
+                String.Empty;
+        } 
+        set {
+            // To prevent recursive events & updates
+            if (value == this.Text) {
+                return;
+            }
+            // If text was set by redoing the changes, keep undo history, 
+            // otherwise discard it.
+            if (this.UndoneHistory.Count > 0 && this.UndoneHistory.Last.Value != value) {
+                this.UndoneHistory.Clear();
+            }
+            // Write to history
+            this.History.AddLast(value);
+            if (this.History.Count > HistorySize) {
+                this.History.RemoveFirst();
+            }
+            // Invoke the TextChanged event
+            this.TextChanged.Invoke();
+        } 
+    }
+
+    public void TryUndo()
+    {
+        if (this.History.Count > 0) {
+            this.UndoneHistory.AddLast(this.History.Last.Value);
+            if (this.UndoneHistory.Count > HistorySize) {
+                this.UndoneHistory.RemoveFirst();
+            }
+            this.History.RemoveLast();
+            this.TextChanged.Invoke();
+        }
+    }
+
+    public void TryRedo()
+    {
+        if (this.UndoneHistory.Count > 0) {
+            this.Text = this.UndoneHistory.Last.Value;
+            if (this.History.Count > HistorySize) {
+                this.History.RemoveFirst();
+            }
+            this.UndoneHistory.RemoveLast();
+            this.TextChanged.Invoke();
+        }
+    }
 
     public bool TryOpen() 
     {
         try {
             var reader = new StreamReader(this.OpenSelector());
             this.Text = reader.ReadToEnd();
-            this.TextChanged.Invoke();
             return true;
         }
         catch (Exception ex) {
@@ -42,12 +100,16 @@ class TextEditor: ITextEditor
         this.ShowStatsPopup(new TextStats(this.Text, Encoding.UTF8));
     }
 
+    public void ShowSearch()
+    {
+        this.ShowSearchPopup(this.Text);
+    }
+
     public void ShowRemovedSpaces()
     {
         string newText = Utils.RemoveSpaces(this.Text);
         if (this.ShowRemovedSpacesPopup(this.Text, newText)) {
             this.Text = newText;
-            this.TextChanged.Invoke();
         }
     }
 }

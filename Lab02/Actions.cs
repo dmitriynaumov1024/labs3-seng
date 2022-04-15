@@ -46,4 +46,10 @@ class Actions
         var proposedTextView = new ProposedTextView(oldText, newText);
         return proposedTextView.ShowDialog() == DialogResult.OK;
     }
+
+    public static void ShowSearch (string text)
+    {
+        var SearchView = new SearchView(text);
+        SearchView.ShowDialog();
+    }
 }

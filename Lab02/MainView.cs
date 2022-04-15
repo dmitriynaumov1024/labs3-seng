@@ -41,23 +41,32 @@ class MainView : Form
             Dock = DockStyle.Top
         };
         var fileItem = new ToolStripMenuItem { Text = "File" };
-        fileItem.DropDownItems.Add("Open file...", null, (sender, args) => {
+        fileItem.DropDownItems.Add("Open file", null, (sender, args) => {
             editor.TryOpen();
         });
-        fileItem.DropDownItems.Add("Save as...", null, (sender, args) => {
+        fileItem.DropDownItems.Add("Save as", null, (sender, args) => {
             editor.TrySave();
         });
-        fileItem.DropDownItems.Add("Statistics", null, (sender, args) => {
-            editor.ShowStats();
-        });
         var editItem = new ToolStripMenuItem { Text = "Edit" };
-        editItem.DropDownItems.Add("Undo", null, (sender, args) => {});
-        editItem.DropDownItems.Add("Redo", null, (sender, args) => {});
+        editItem.DropDownItems.Add("Undo", null, (sender, args) => {
+            editor.TryUndo();
+        });
+        editItem.DropDownItems.Add("Redo", null, (sender, args) => {
+            editor.TryRedo();
+        });
         editItem.DropDownItems.Add("Remove spaces", null, (sender, args) => {
             editor.ShowRemovedSpaces();
         });
+        var toolItem = new ToolStripMenuItem { Text = "Tools" };
+        toolItem.DropDownItems.Add("Search", null, (sender, args) => {
+            editor.ShowSearch();
+        });
+        toolItem.DropDownItems.Add("Statistics", null, (sender, args) => {
+            editor.ShowStats();
+        });
         this.menuStrip.Items.Add(fileItem);
         this.menuStrip.Items.Add(editItem);
+        this.menuStrip.Items.Add(toolItem);
 
         // Add top-level controls to this view  
         this.Controls.Add(this.textArea);
