@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FileServerConfig>
+    <Base>E:/Proj_1/labs3-seng/</Base>
+    <IpAddress>127.0.0.1</IpAddress>
+    <Port>8000</Port>
+</FileServerConfig>
