@@ -40,7 +40,7 @@ class Utils
             return String.Format("{0} is a file.\r\n", relPath);
         }
         else {
-            return String.Format("Directory {0} does not exist.\r\n", relPath);
+            return String.Format("{0} does not exist.\r\n", relPath);
         }
     }
 }
