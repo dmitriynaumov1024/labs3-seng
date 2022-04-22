@@ -89,6 +89,7 @@ class EchoServer : TcpListener
             Console.Write("{0}\r\n", line);
             writer.Write("{0}\r\n", line);
         }
+        writer.Flush();
         client.Close();
     }
 
