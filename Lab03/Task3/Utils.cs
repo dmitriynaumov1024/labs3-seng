@@ -8,7 +8,7 @@ class Utils
         "HTTP/1.1 200 OK\r\n" + 
         "Connection: keep-alive\r\n" + 
         "Content-Type: text/plain\r\n" +
-        "Server: STFU\r\n\r\n";
+        "Server: Simple Text Fileserver Utility\r\n\r\n";
 
     public static string GetRelativePath (DirectoryInfo directory, DirectoryInfo root)
     {
