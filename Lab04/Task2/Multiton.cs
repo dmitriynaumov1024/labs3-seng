@@ -9,7 +9,7 @@ public class Multiton<T> where T : class
     private static T CreateInstance()
     {
         if (typeof(T).GetConstructors().Length > 0) {
-            throw new Exception("Kurwa!");
+            throw new Exception();
         }
         ConstructorInfo cInfo = typeof(T).GetConstructor (
             BindingFlags.Instance | BindingFlags.NonPublic,
