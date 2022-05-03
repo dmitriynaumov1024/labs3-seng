@@ -22,6 +22,8 @@ public class RtfTextBuilder : TextBuilder
 
     public RtfTextBuilder (TextBuilder source) : base (source) { }
 
+    public RtfTextBuilder (IEnumerable<TextChunk> chunks) : base (chunks) { }
+
     public override void SaveTo (TextWriter writer)
     {
         writer.Write(RTF_BEGIN);

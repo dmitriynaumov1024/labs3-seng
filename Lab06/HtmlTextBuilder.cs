@@ -23,6 +23,8 @@ public class HtmlTextBuilder : TextBuilder
 
     public HtmlTextBuilder (TextBuilder source) : base (source) { }
 
+    public HtmlTextBuilder (IEnumerable<TextChunk> chunks) : base (chunks) { }
+
     public override void SaveTo (TextWriter writer)
     {
         writer.Write(HTML_BEGIN);

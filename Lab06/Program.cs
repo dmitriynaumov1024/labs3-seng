@@ -27,9 +27,13 @@ public class Program
     public static void Main (string[] args)
     {
         if (!Directory.Exists("./example/")) {
-            Directory.CreateDirectory("./example/");
+            Console.Write("Directory example does not exist. \n");
+            return;
         }
 
+        TextParser p1 = new RtfTextParser(File.OpenText("./example/Helloworld2.rtf"));
+
+        /*
         TextBuilder b1 = new PlainTextBuilder();
         DirectTheBuild(b1);
         b1.SaveTo(File.Create("./example/result.txt"));
@@ -40,5 +44,10 @@ public class Program
 
         TextBuilder b3 = new RtfTextBuilder(b2);
         b3.SaveTo(File.Create("./example/result.rtf"));
+        */
+
+        new PlainTextBuilder(p1.Chunks).SaveTo(File.Create("./example/rtf-to-plain.txt"));
+        new HtmlTextBuilder(p1.Chunks).SaveTo(File.Create("./example/rtf-to-html.html"));
+
     }
 }

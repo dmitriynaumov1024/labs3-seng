@@ -13,10 +13,19 @@ public abstract class TextBuilder
         this.chunks = new List<TextChunk>();
     }
 
-    public TextBuilder (TextBuilder source)
+    public TextBuilder (TextBuilder source) : this ()
     {
-        this.chunks = new List<TextChunk>();
         this.chunks.AddRange(source.chunks);
+    }
+
+    public TextBuilder (IEnumerable<TextChunk> chunks) : this ()
+    {
+        this.chunks.AddRange(chunks);
+    }
+
+    public void AddTextChunk (TextChunk chunk)
+    {
+        this.chunks.Add(chunk);
     }
 
     public void AddText (string text, TextStyles style = TextStyles.Plain) 

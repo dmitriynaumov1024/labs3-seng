@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -7,6 +8,8 @@ public class PlainTextBuilder : TextBuilder
     public PlainTextBuilder () : base () { }
 
     public PlainTextBuilder (TextBuilder source) : base (source) { }
+
+    public PlainTextBuilder (IEnumerable<TextChunk> chunks) : base (chunks) { }
 
     public override void SaveTo (TextWriter writer)
     {

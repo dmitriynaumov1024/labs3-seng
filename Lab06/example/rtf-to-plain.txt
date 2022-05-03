@@ -1,0 +1,5 @@
+Hello world! 
+Hello world x2! 
+Lorem (ipsum) sit amet... 
+bold strikethrough { }  
+This is backslash: \

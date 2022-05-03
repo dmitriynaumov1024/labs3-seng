@@ -22,4 +22,13 @@ public static class Utils
         sb.Replace("}", "\\}");
         return sb.ToString();
     }
+
+    public static string RtfDecoded (this string source)
+    {
+        StringBuilder sb = new StringBuilder(source);
+        sb.Replace("\\\\", "\\");
+        sb.Replace("\\{", "{");
+        sb.Replace("\\}", "}");
+        return sb.ToString();
+    }
 }
