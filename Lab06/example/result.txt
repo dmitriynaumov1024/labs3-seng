@@ -1,7 +1,0 @@
-Hello!
-This is bold italic
-#include <stdio.h>
-#include <stdlib.h>
-int main() { return 0; }
-This is underline
-This is strikethrough { }

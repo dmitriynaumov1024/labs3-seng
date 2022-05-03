@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+<p>using System;</p>
+<p>using System.Collections.Generic;</p>
+<p>using System.Windows.Forms;</p>
+<p></p>
+<p>public class ApplicationBag: Singleton&lt;ApplicationBag&gt;</p>
+<p>{</p>
+<p>    private HashSet&lt;Form&gt; forms;</p>
+<p></p>
+<p>    protected ApplicationBag()</p>
+<p>    {</p>
+<p>        this.forms = new HashSet&lt;Form&gt;();</p>
+<p>    }</p>
+<p></p>
+<p>    public void Add (Form form) </p>
+<p>    {</p>
+<p>        this.forms.Add(form);</p>
+<p>    }</p>
+<p></p>
+<p>    public void Remove (Form form)</p>
+<p>    {</p>
+<p>        this.forms.Remove(form);</p>
+<p>        if (this.forms.Count == 0) Application.Exit();</p>
+<p>    }</p>
+<p>}</p>
+<p></p>
+</body>
+</html>

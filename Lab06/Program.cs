@@ -32,22 +32,13 @@ public class Program
         }
 
         TextParser p1 = new RtfTextParser(File.OpenText("./example/Helloworld2.rtf"));
-
-        /*
-        TextBuilder b1 = new PlainTextBuilder();
-        DirectTheBuild(b1);
-        b1.SaveTo(File.Create("./example/result.txt"));
-
-        TextBuilder b2 = new HtmlTextBuilder();
-        DirectTheBuild(b2);
-        b2.SaveTo(File.Create("./example/result.html"));
-
-        TextBuilder b3 = new RtfTextBuilder(b2);
-        b3.SaveTo(File.Create("./example/result.rtf"));
-        */
+        TextParser p2 = new PlainTextParser(File.OpenText("./example/ApplicationBag.cs"));
 
         new PlainTextBuilder(p1.Chunks).SaveTo(File.Create("./example/rtf-to-plain.txt"));
         new HtmlTextBuilder(p1.Chunks).SaveTo(File.Create("./example/rtf-to-html.html"));
+        new RtfTextBuilder(p1.Chunks).SaveTo(File.Create("./example/rtf-to-rtf.rtf"));
 
+        new RtfTextBuilder(p2.Chunks).SaveTo(File.Create("./example/txt-to-rtf.rtf"));
+        new HtmlTextBuilder(p2.Chunks).SaveTo(File.Create("./example/txt-to-html.html"));
     }
 }

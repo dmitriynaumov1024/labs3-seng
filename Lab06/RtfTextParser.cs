@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Threading;
 
 public class RtfTextParser : TextParser
 {
@@ -23,8 +22,6 @@ public class RtfTextParser : TextParser
 
     protected override List<TextChunk> ParseImpl (string source)
     {
-        Console.Write(source);
-        Console.Write("\n");
         List<TextChunk> result = new List<TextChunk>();
 
         int length = source.Length;
@@ -36,19 +33,17 @@ public class RtfTextParser : TextParser
         styles.Push(TextStyles.Plain);
 
         Action chunkIsDone = () => {
+            if (chunkLength == 0) return;
             string text = new String(chars, 0, chunkLength);
-            Console.Write("[chunk]: {0}\n", text);
             result.Add (new TextChunk {
                 Text = text,
                 Style = styles.Peek()
             });
             chunkLength = 0;
-            Thread.Sleep(500);
         };
 
         Action doDirective = () => {
             string dString = new String(chars, 0, chunkLength);
-            Console.Write("[dString]: {0}\n", dString);
             chunkLength = 0;
             if (dString == "par") {
                 result.Add(TextChunk.Paragraph);
@@ -59,7 +54,6 @@ public class RtfTextParser : TextParser
                 styles.Push(styles.Pop() | newStyle);
                 return;
             }
-            Thread.Sleep(500);
         };
 
         for (int index = 0; index < length; index++) {
@@ -70,7 +64,7 @@ public class RtfTextParser : TextParser
                     chars[chunkLength++] = next;
                 }
                 else {
-                    if (chunkLength > 0) chunkIsDone();
+                    chunkIsDone();
                     for (; index < length; index++) {
                         char c = source[index];
                         if (isDirective(c)) {
@@ -98,9 +92,7 @@ public class RtfTextParser : TextParser
                 chars[chunkLength++] = current;
             }
         }
-        if (chunkLength > 0) {
-            chunkIsDone();
-        }
+        chunkIsDone();
         return result;
     }
 }

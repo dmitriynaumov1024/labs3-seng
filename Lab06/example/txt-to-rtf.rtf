@@ -1,0 +1,27 @@
+{\rtf1 
+using System;\par
+using System.Collections.Generic;\par
+using System.Windows.Forms;\par
+\par
+public class ApplicationBag: Singleton<ApplicationBag>\par
+\{\par
+    private HashSet<Form> forms;\par
+\par
+    protected ApplicationBag()\par
+    \{\par
+        this.forms = new HashSet<Form>();\par
+    \}\par
+\par
+    public void Add (Form form) \par
+    \{\par
+        this.forms.Add(form);\par
+    \}\par
+\par
+    public void Remove (Form form)\par
+    \{\par
+        this.forms.Remove(form);\par
+        if (this.forms.Count == 0) Application.Exit();\par
+    \}\par
+\}\par
+\par
+}
