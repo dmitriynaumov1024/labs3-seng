@@ -1,0 +1,40 @@
+{
+  "nativeName": "Українська",
+
+  "windowName": "Bloknot",
+  "windowReadonlyName": "Bloknot (тільки читання)",
+  "menu.file": "Файл",
+  "menu.file.createNew": "Створити новий",
+  "menu.file.openFile": "Відкрити",
+  "menu.file.saveAs": "Зберегти",
+  "menu.edit": "Редагування",
+  "menu.edit.undo": "Відмінити",
+  "menu.edit.redo": "Повторити",
+  "menu.edit.removeSpaces": "Видалити пробіли",
+  "menu.tools": "Інструменти",
+  "menu.tools.search": "Пошук",
+  "menu.tools.statistics": "Статистика",
+  "menu.tools.language": "Мова",
+
+  "languageViewName": "Вибір мови",
+
+  "searchViewName": "Пошук",
+  "search.resultPlaceholder": "Результат",
+  "search.findButton": "Пошук",
+  "search.usePresets": "Застосувати шаблон",
+  "search.customRegex": "Саморобний Regex",
+
+  "statsViewName": "Статистика",
+  "stats.fileSize": "Розмір файлу",
+  "stats.kbCount": "Кбайт",
+  "stats.pageCount": "сторінок",
+  "stats.lineCount": "рядків",
+  "stats.emptyLineCount": "пустих рядків",
+  "stats.charCount": "символи",
+  "stats.letterCount": "букви",
+  "stats.vowelCount": "голосні",
+  "stats.consCount": "приголосні",
+  "stats.digitCount": "цифри",
+  "stats.punctCount": "знаки пунктуації",
+  "stats.otherCount": "інші символи"
+}

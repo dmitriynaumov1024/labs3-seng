@@ -32,8 +32,8 @@ class SearchView : Form
         panel.RowStyles.Add (new RowStyle(SizeType.Percent, 41));
 
         panel.ColumnStyles.Add (new ColumnStyle(SizeType.Percent, 40));
-        panel.ColumnStyles.Add (new ColumnStyle(SizeType.Percent, 53));
-        panel.ColumnStyles.Add (new ColumnStyle(SizeType.Percent, 7));
+        panel.ColumnStyles.Add (new ColumnStyle(SizeType.Percent, 51));
+        panel.ColumnStyles.Add (new ColumnStyle(SizeType.Percent, 9));
 
         var sourceText = new TextBox { 
             Text = this.data, 
@@ -90,7 +90,6 @@ class SearchView : Form
         };
         panel.Controls.Add (customRegexInput, row: 2, column: 1);
         var customRegexApply = new Button {
-            Text = "Find",
             Enabled = false,
             Dock = DockStyle.Top,
             Margin = new Padding(0)  
@@ -100,15 +99,10 @@ class SearchView : Form
         };
         panel.Controls.Add (customRegexApply, row: 2, column: 2);
 
-        var knownRegexRB = new RadioButton {
-            Text = "Use Presets",
-            Dock = DockStyle.Bottom
-        };
+        var knownRegexRB = new RadioButton { Dock = DockStyle.Bottom };
         panel.Controls.Add (knownRegexRB, row: 1, column: 0);
-        var customRegexRB = new RadioButton {
-            Text = "Custom Regex",
-            Dock = DockStyle.Top
-        };
+
+        var customRegexRB = new RadioButton { Dock = DockStyle.Top };
         panel.Controls.Add (customRegexRB, row: 2, column: 0);
 
         EventHandler regexRBChangeHandler = (sender, args) => {
@@ -127,5 +121,13 @@ class SearchView : Form
         knownRegexRB.CheckedChanged += regexRBChangeHandler;
 
         this.Controls.Add(panel);
+
+        this.UseLocale(locale => {
+            this.Text = locale["searchViewName"];
+            customRegexApply.Text = locale["search.findButton"];
+            resultText.Text = locale["search.resultPlaceholder"];
+            customRegexRB.Text = locale["search.customRegex"];
+            knownRegexRB.Text = locale["search.usePresets"];
+        });
     }
 }

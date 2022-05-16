@@ -7,7 +7,7 @@ class TextEditor: Multiton<TextEditor>, ITextEditor
 {
     const int HistorySize = 100;
 
-    private string fileName;
+    private string fileName = "Untitled";
 
     public Func<ITextEditor> CreateNewEditor { get; set; }
     public Func<ITextEditor> CreateNewReadonly { get; set; }
@@ -18,7 +18,7 @@ class TextEditor: Multiton<TextEditor>, ITextEditor
     public Action<string> ShowSearchPopup { get; set; }
     public Func<string, string, bool> ShowRemovedSpacesPopup { get; set; }
     public event Action TextChanged;
-    public event Action CaptionChanged;
+    public event Action FileNameChanged;
 
     private LinkedList<string> History = new LinkedList<string> { };
     private LinkedList<string> UndoneHistory = new LinkedList<string> { };
@@ -56,9 +56,9 @@ class TextEditor: Multiton<TextEditor>, ITextEditor
         } 
     }
 
-    public string Caption {
+    public string FileName {
         get {
-            return String.Format("{0} - Bloknot", this.fileName);
+            return this.fileName;
         }
     }
 
@@ -114,7 +114,7 @@ class TextEditor: Multiton<TextEditor>, ITextEditor
         if (provider.Parser is PlainTextParser) {
             this.Text = new PlainTextBuilder(provider.Parser.Chunks).ConvertToString();
             this.fileName = provider.FileName;
-            this.CaptionChanged.Invoke();
+            this.FileNameChanged.Invoke();
         }
     }
 
@@ -148,7 +148,7 @@ class TextEditor: Multiton<TextEditor>, ITextEditor
             provider.Builder.AddManyTextChunks(new PlainTextParser(this.Text).Chunks);
             provider.Write();
             this.fileName = provider.FileName;
-            this.CaptionChanged.Invoke();
+            this.FileNameChanged.Invoke();
             return true;
         }
         catch (Exception ex) {

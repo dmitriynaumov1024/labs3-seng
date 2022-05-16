@@ -3,7 +3,7 @@ using System;
 interface ITextEditor
 {
     string Text { get; set; }
-    string Caption { get; }
+    string FileName { get; }
     bool TryNew();
     bool TrySave();
     bool TryOpen();
@@ -15,5 +15,5 @@ interface ITextEditor
     void ShowRemovedSpaces();
     void SetFileProvider(InFileProvider provider);
     event Action TextChanged;
-    event Action CaptionChanged;
+    event Action FileNameChanged;
 }

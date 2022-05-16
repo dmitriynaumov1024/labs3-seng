@@ -16,7 +16,7 @@ class TextEditorReadonly : Multiton<TextEditorReadonly>, ITextEditor
     public Action<string> ShowSearchPopup { get; set; }
 
     public event Action TextChanged;
-    public event Action CaptionChanged;
+    public event Action FileNameChanged;
 
     protected TextEditorReadonly ()
     {
@@ -33,9 +33,9 @@ class TextEditorReadonly : Multiton<TextEditorReadonly>, ITextEditor
         } 
     }
 
-    public string Caption {
+    public string FileName {
         get {
-            return String.Format("{0} (Readonly) - Bloknot", this.fileName);
+            return this.fileName;
         }
     }
 
@@ -76,7 +76,7 @@ class TextEditorReadonly : Multiton<TextEditorReadonly>, ITextEditor
     public void SetFileProvider(InFileProvider provider)
     {
         this.fileName = provider.FileName;
-        this.CaptionChanged.Invoke();
+        this.FileNameChanged.Invoke();
         this.chunks = provider.Parser.Chunks;
         this.Text = new PlainTextBuilder(provider.Parser.Chunks).ConvertToString();
     }

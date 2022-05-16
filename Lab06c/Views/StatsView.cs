@@ -15,24 +15,31 @@ class StatsView : Form
         this.Padding = new Padding(5);
         this.BackColor = Styles.BackgroundColor;
 
-        StringBuilder sb = new StringBuilder();
-        sb.AppendFormat("Size: {0:F2} Kb\n", stats.KbCount);
-        sb.AppendFormat("{0} pages\n", stats.PageCount);
-        sb.AppendFormat("{0} lines\n", stats.LineCount);
-        sb.AppendFormat(" └ {0} empty lines\n", stats.EmptyLineCount);
-
-        sb.AppendFormat("{0} chars\n", stats.CharCount);
-        sb.AppendFormat(" ├ {0} letters\n", stats.LetterCount);
-        sb.AppendFormat(" │  ├ {0} vowels\n", stats.VowelCount);
-        sb.AppendFormat(" │  └ {0} consonants\n", stats.ConsCount);
-        sb.AppendFormat(" ├ {0} digits\n", stats.DigitCount);
-        sb.AppendFormat(" ├ {0} punctuations\n", stats.PunctCount);
-        sb.AppendFormat(" └ {0} other symbols\n", stats.OtherCount);
-
-        this.Controls.Add (new Label {
+        var label = new Label {
             Dock = DockStyle.Fill,
-            Text = sb.ToString(),
             Font = Styles.MonospaceFont
+        };
+
+        this.Controls.Add (label);
+
+        this.UseLocale(locale => {
+
+            this.Text = locale["statsViewName"];
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("{2}: {0:F2} {1}\n", stats.KbCount, locale["stats.kbCount"], locale["stats.fileSize"]);
+            sb.AppendFormat("{0} {1}\n", stats.PageCount, locale["stats.pageCount"]);
+            sb.AppendFormat("{0} {1}\n", stats.LineCount, locale["stats.lineCount"]);
+            sb.AppendFormat(" └ {0} {1}\n", stats.EmptyLineCount, locale["stats.emptyLineCount"]);
+            sb.AppendFormat("{0} {1}\n", stats.CharCount, locale["stats.charCount"]);
+            sb.AppendFormat(" ├ {0} {1}\n", stats.LetterCount, locale["stats.letterCount"]);
+            sb.AppendFormat(" │  ├ {0} {1}\n", stats.VowelCount, locale["stats.vowelCount"]);
+            sb.AppendFormat(" │  └ {0} {1}\n", stats.ConsCount, locale["stats.consCount"]);
+            sb.AppendFormat(" ├ {0} {1}\n", stats.DigitCount, locale["stats.digitCount"]);
+            sb.AppendFormat(" ├ {0} {1}\n", stats.PunctCount, locale["stats.punctCount"]);
+            sb.AppendFormat(" └ {0} {1}\n", stats.OtherCount, locale["stats.otherCount"]);
+
+            label.Text = sb.ToString();
         });
     }
 }

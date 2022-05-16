@@ -81,4 +81,9 @@ class Actions
         var SearchView = new SearchView(text);
         SearchView.ShowDialog();
     }
+
+    public static void SelectLanguage ()
+    {
+        LanguageView.Show();
+    }
 }

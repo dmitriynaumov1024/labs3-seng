@@ -1,0 +1,40 @@
+{
+  "nativeName": "English",
+
+  "windowName": "Bloknot",
+  "windowReadonlyName": "Bloknot (readonly)",
+  "menu.file": "File",
+  "menu.file.createNew": "Create new",
+  "menu.file.openFile": "Open file",
+  "menu.file.saveAs": "Save as",
+  "menu.edit": "Edit",
+  "menu.edit.undo": "Undo",
+  "menu.edit.redo": "Redo",
+  "menu.edit.removeSpaces": "Remove spaces",
+  "menu.tools": "Tools",
+  "menu.tools.search": "Search",
+  "menu.tools.statistics": "Statistics",
+  "menu.tools.language": "Select Language",
+
+  "languageViewName": "Select language",
+
+  "searchViewName": "Search",
+  "search.resultPlaceholder": "Results will be here",
+  "search.findButton": "Find",
+  "search.usePresets": "Use presets",
+  "search.customRegex": "Custom Regex",
+
+  "statsViewName": "Statistics",
+  "stats.fileSize": "Size",
+  "stats.kbCount": "Kb",
+  "stats.pageCount": "pages",
+  "stats.lineCount": "lines",
+  "stats.emptyLineCount": "empty lines",
+  "stats.charCount": "chars",
+  "stats.letterCount": "letters",
+  "stats.vowelCount": "vowels",
+  "stats.consCount": "consonants",
+  "stats.digitCount": "digits",
+  "stats.punctCount": "punctuations",
+  "stats.otherCount": "other symbols"
+}
